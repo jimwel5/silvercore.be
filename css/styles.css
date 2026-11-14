@@ -20,26 +20,26 @@
 /* --- Stripe theme (default) --- */
 :root,
 :root[data-theme="stripe"] {
-  --bg: #ffffff;
-  --bg-subtle: #f6f9fc;
-  --bg-muted: #eef2f7;
-  --text: #0a2540;
-  --text-muted: #425466;
-  --text-subtle: #697386;
-  --border: rgba(0, 0, 0, 0.08);
-  --accent: #635bff;
-  --accent-hover: #4f46e5;
-  --accent-soft: rgba(99, 91, 255, 0.1);
+  --bg: #f6f7f8;
+  --bg-subtle: #eceff1;
+  --bg-muted: #e1e5e8;
+  --text: #252b31;
+  --text-muted: #58616a;
+  --text-subtle: #78828b;
+  --border: rgba(37, 43, 49, 0.11);
+  --accent: #74808a;
+  --accent-hover: #59636d;
+  --accent-soft: rgba(116, 128, 138, 0.12);
   --gradient-hero: linear-gradient(
     135deg,
-    #635bff 0%,
-    #7c3aed 25%,
-    #06b6d4 50%,
-    #10b981 75%,
-    #f59e0b 100%
+    #56616b 0%,
+    #87919a 25%,
+    #c5cacf 50%,
+    #909ba4 75%,
+    #49545e 100%
   );
-  --gradient-text: linear-gradient(135deg, #635bff, #06b6d4);
-  --hero-accent-text: #5d7a96;
+  --gradient-text: linear-gradient(135deg, #66727c, #aeb6bd);
+  --hero-accent-text: #58616a;
   /* Stripe-style silk swoosh — layered radial bands */
   --sw-base:
     radial-gradient(60% 55% at 78% -4%, #aab8ff 0%, rgba(170,184,255,0) 58%),
@@ -52,14 +52,14 @@
   --sw-light: radial-gradient(54% 60% at 80% 8%, #c4d0ff 0%, rgba(196,208,255,0) 62%);
   --sw-fold: radial-gradient(32% 130% at 74% 40%, rgba(255,241,210,0.95) 0%, rgba(255,176,84,0.3) 32%, rgba(255,176,84,0) 58%);
   --sw-deep: radial-gradient(64% 78% at 100% 92%, #5a23d6 0%, rgba(90,35,214,0) 56%);
-  --logo-stop-1: #635bff;
-  --logo-stop-2: #06b6d4;
-  --logo-stop-3: #10b981;
-  --code-bg: #0a2540;
+  --logo-stop-1: #66727c;
+  --logo-stop-2: #aeb6bd;
+  --logo-stop-3: #d7dade;
+  --code-bg: #252b31;
   --code-header: #1a365d;
-  --btn-primary-bg: #635bff;
-  --btn-primary-hover: #4f46e5;
-  --card-hover-border: rgba(99, 91, 255, 0.3);
+  --btn-primary-bg: #707c86;
+  --btn-primary-hover: #5d6871;
+  --card-hover-border: rgba(102, 114, 124, 0.35);
 }
 
 /* --- Reset & base --- */
@@ -156,7 +156,7 @@ ul {
   top: 0;
   z-index: 100;
   height: var(--header-height);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(246, 247, 248, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -183,6 +183,19 @@ ul {
 
 .logo-text {
   text-transform: lowercase;
+  letter-spacing: -0.045em;
+}
+
+.logo-text::before {
+  content: "";
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.45rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  vertical-align: 0.08em;
 }
 
 .nav-toggle {
@@ -278,7 +291,7 @@ ul {
   font-family: inherit;
   font-size: 0.9375rem;
   font-weight: 600;
-  border-radius: var(--radius-md);
+  border-radius: 999px;
   border: none;
   cursor: pointer;
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
@@ -302,21 +315,22 @@ ul {
   box-shadow: var(--shadow-md);
 }
 
-/* Hero-orange accent button */
+/* Silver accent button */
 .btn-accent {
-  background: linear-gradient(135deg, #ff8a3d 0%, #f4632b 100%);
-  color: #fff;
-  box-shadow: 0 1px 2px rgba(244, 99, 43, 0.25);
+  background: linear-gradient(135deg, #d7dce0 0%, #abb4bc 100%);
+  color: #252b31;
+  box-shadow: 0 1px 2px rgba(58, 67, 76, 0.14);
 }
 
 .btn-accent:hover {
-  background: linear-gradient(135deg, #ff7a2b 0%, #e85420 100%);
+  background: linear-gradient(135deg, #c1c8ce 0%, #98a2aa 100%);
+  color: #252b31;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(244, 99, 43, 0.35);
+  box-shadow: 0 6px 18px rgba(58, 67, 76, 0.2);
 }
 
 .btn-accent:focus-visible {
-  outline-color: #f4632b;
+  outline-color: #74808a;
 }
 
 .btn-secondary {
@@ -345,6 +359,7 @@ ul {
 .hero {
   position: relative;
   overflow: hidden;
+  min-height: 620px;
   padding: 7rem 0 8rem;
   display: flex;
   align-items: center;
@@ -353,17 +368,21 @@ ul {
 /* Signature Stripe silk swoosh — anchored top-right, fading into white near the text */
 .hero-bg {
   position: absolute;
-  top: -34%;
-  right: -14%;
-  width: 70%;
-  height: 168%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(90deg, rgba(72, 79, 86, 0.84) 0%, rgba(77, 84, 91, 0.74) 43%, rgba(108, 116, 123, 0.38) 100%),
+    linear-gradient(0deg, rgba(222, 226, 230, 0.12), rgba(222, 226, 230, 0.12)),
+    url("../jean-philippe-delberghe-75xPHEQBmvA-unsplash.jpg");
+  background-size: cover;
+  background-position: center 48%;
+  filter: grayscale(82%) brightness(1.14) contrast(1.02);
   pointer-events: none;
-  /* Dissolve into the white page on the left so the headline stays on clean white */
-  -webkit-mask-image: linear-gradient(102deg, transparent 4%, rgba(0, 0, 0, 0.65) 22%, #000 42%);
-  mask-image: linear-gradient(102deg, transparent 4%, rgba(0, 0, 0, 0.65) 22%, #000 42%);
 }
 
 .swoosh {
+  display: none;
   position: absolute;
   inset: 0;
   will-change: transform;
@@ -422,12 +441,12 @@ ul {
 .hero-eyebrow {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--text);
+  color: #252b31;
   margin-bottom: 1.5rem;
 }
 
 .hero-eyebrow span {
-  color: var(--accent);
+  color: #58616a;
 }
 
 .hero h1 {
@@ -436,14 +455,18 @@ ul {
   line-height: 1.08;
   letter-spacing: -0.035em;
   margin-bottom: 2rem;
-  color: var(--text);
+  color: #252b31;
 }
 
 .hero h1 .hero-accent {
   display: block;
-  margin-top: 0.5rem;
+  max-width: 34rem;
+  margin-top: 1rem;
   color: var(--hero-accent-text);
-  font-weight: 600;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: 0;
 }
 
 .hero-actions {
@@ -461,7 +484,7 @@ ul {
 .clients {
   border-bottom: 1px solid var(--border);
   padding: 1.5rem 0;
-  background: var(--bg);
+  background: #fff;
 }
 
 .clients-row {
@@ -522,7 +545,7 @@ ul {
 }
 
 .card {
-  background: var(--bg);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 2rem;
@@ -532,7 +555,7 @@ ul {
 .card:hover {
   border-color: var(--card-hover-border);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .card-icon {
@@ -588,7 +611,7 @@ ul {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-muted);
-  background: var(--bg-subtle);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 999px;
 }
@@ -603,7 +626,7 @@ ul {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  background: var(--bg-subtle);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   text-align: center;
@@ -625,7 +648,8 @@ ul {
 
 /* --- Contact --- */
 .contact {
-  background: var(--bg-subtle);
+  background: #dce1e5;
+  color: #252b31;
 }
 
 .contact-inner {
@@ -646,7 +670,7 @@ ul {
 }
 
 .contact-content p {
-  color: var(--text-muted);
+  color: #58616a;
   font-size: 1.0625rem;
   margin-bottom: 2rem;
 }
@@ -682,9 +706,7 @@ ul {
   }
 
   .hero-bg {
-    width: 95%;
-    right: -25%;
-    opacity: 0.85;
+    background-position: 58% center;
   }
 
   .card-grid {
@@ -751,11 +773,16 @@ ul {
   }
 
   .hero {
-    padding: 3.5rem 0 4.5rem;
+    min-height: 560px;
+    padding: 5rem 0;
   }
 
   .hero-bg {
-    opacity: 0.6;
+    background-image:
+      linear-gradient(90deg, rgba(70, 77, 84, 0.78), rgba(108, 116, 123, 0.5)),
+      linear-gradient(0deg, rgba(222, 226, 230, 0.12), rgba(222, 226, 230, 0.12)),
+      url("../jean-philippe-delberghe-75xPHEQBmvA-unsplash.jpg");
+    background-position: 58% center;
   }
 
   .clients-row {
